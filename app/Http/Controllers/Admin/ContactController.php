@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\About;
-use App\Http\Requests\StoreAboutRequest;
-use App\Http\Requests\UpdateAboutRequest;
+use App\Models\Contact;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreContactRequest;
+use App\Http\Requests\UpdateContactRequest;
 
-class AboutController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class AboutController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAboutRequest $request)
+    public function store(StoreContactRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class AboutController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(About $about)
+    public function show(Contact $contact)
     {
         //
     }
@@ -43,7 +44,7 @@ class AboutController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(About $about)
+    public function edit(Contact $contact)
     {
         //
     }
@@ -51,7 +52,7 @@ class AboutController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAboutRequest $request, About $about)
+    public function update(UpdateContactRequest $request, Contact $contact)
     {
         //
     }
@@ -59,7 +60,7 @@ class AboutController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(About $about)
+    public function destroy(Contact $contact)
     {
         //
     }

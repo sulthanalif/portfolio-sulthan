@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-     <title>Ben's Resume - Profile HTML Page</title>
+     <title>Portfolio - Sulthan</title>
 
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -52,7 +52,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="#testimonials" class="nav-link smoothScroll">Portfolio</a>
+                        <a href="#portfolio" class="nav-link smoothScroll">Portfolio</a>
                     </li>
 
                     <li class="nav-item">
@@ -82,7 +82,7 @@
                    <div class="d-flex flex-column justify-content-center align-items-center col-lg-7 col-md-7 col-12">
                         <div class="hero-text">
 
-                            <h1 class="hero-title">👋 {{ $getHeader->name }}, a {{ $getHeader->as }}</h1>
+                            <h1 class="hero-title">👋 {{ $getHeader->name }}, {{ $getHeader->as }}</h1>
 
                             <a href="#" class="email-link">
                                 {{ $getHeader->email }}
@@ -142,7 +142,7 @@
 
 
     <!-- PORTFOLIO -->
-    <section class="testimonials section-padding" id="testimonials">
+    <section class="testimonials section-padding" id="portfolio">
         <div class="container">
             <div class="row">
 
@@ -272,8 +272,8 @@
      <script src="{{ asset('assets') }}/js/custom.js"></script>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script> --}}
 
 </body>
 </html>

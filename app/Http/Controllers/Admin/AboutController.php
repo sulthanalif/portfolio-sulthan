@@ -1,24 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Header;
-use App\Http\Requests\StoreHeaderRequest;
-use App\Http\Requests\UpdateHeaderRequest;
+use App\Models\About;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAboutRequest;
+use App\Http\Requests\UpdateAboutRequest;
 
-class HeaderController extends Controller
+class AboutController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $header = Header::all();
-
-        if($header) {
-            return view('index', ['header' => $header]);
-        }
-
+        //
     }
 
     /**
@@ -32,7 +28,7 @@ class HeaderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreHeaderRequest $request)
+    public function store(StoreAboutRequest $request)
     {
         //
     }
@@ -40,7 +36,7 @@ class HeaderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Header $header)
+    public function show(About $about)
     {
         //
     }
@@ -48,7 +44,7 @@ class HeaderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Header $header)
+    public function edit(About $about)
     {
         //
     }
@@ -56,7 +52,7 @@ class HeaderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateHeaderRequest $request, Header $header)
+    public function update(UpdateAboutRequest $request, About $about)
     {
         //
     }
@@ -64,7 +60,7 @@ class HeaderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Header $header)
+    public function destroy(About $about)
     {
         //
     }
