@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\ImageHelper;
 use App\Models\Header;
 
 
 // use Nette\Utils\Image;
 use Intervention\Image\Image;
+use Illuminate\Support\Facades\Storage;
 // use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -39,42 +41,45 @@ class HeaderController extends Controller
      */
     public function store(StoreHeaderRequest $request)
     {
-        $validator = Validator::make($request->all(), $request->rules());
+         // Menggunakan validator yang sudah didefinisikan dalam StoreHeaderRequest
+    $validator = Validator::make($request->all(), $request->rules());
 
-        if ($validator->fails()) {
-            return redirect()->route('header.index')->with('error', 'Validasi Gagal');
-        }
+    if ($validator->fails()) {
+        return redirect()->route('header.index')->with('error', 'Validasi Gagal');
+    }
 
-        try {
-            DB::transaction(function () use ($request, &$headers) {
-                $file = $request->file('image');
-                 // Manipulasi gambar menggunakan Intervention Image
-                 $image = Image::make($file);
-                 $image->resize(800, null, function ($constraint) {
-                     $constraint->aspectRatio();
-                 });
-                 // Extract the filename without the extension
-                $imageData = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $imageFileName = strtotime(date('Y-m-d H:i:s')) . '.' . $imageData . '.webp';
+    try {
+        DB::transaction(function () use ($request) {
+            // Menggunakan storage untuk menyimpan file, dan menghasilkan nama file unik
+            $image = $request->file('image');
 
-                // Simpan file dengan nama yang sudah dikodekan ke direktori yang sesuai
-                $image->save(base_path() . '/' . env('UPLOADS_DIRECTORY') . '/' . $imageFileName, 90, 'webp');
+            // Menyimpan file ke direktori yang sesuai menggunakan Laravel Storage
+            $imageFileName = ImageHelper::uploadImage($image);
 
-                $headers = Header::create([
+            if (!$imageFileName) {
+                return redirect()->route('header.index')->with('error', 'Gagal Simpan Gambar');
+            } else {
+                // Membuat dan menyimpan instance Header ke dalam database
+                $simpanData = Header::create([
                     'name' => $request->input('name'),
                     'as' => $request->input('as'),
                     'email' => $request->input('email'),
-                    'image' => $request->input('image'),
+                    'image' => $imageFileName,
                 ]);
-                });
-                if ($headers) {
-                    return redirect()->route('header.index')->with('success', 'Data Berhasil Disimpan');
-                } else {
-                    return redirect()->route('header.index')->with('error', 'Data Gagal Disimpan');
+
+                if (!$simpanData) {
+                    return redirect()->route('header.index')->with('error', 'Terjadi Kesalahan Pada Sistem');
                 }
-        } catch (\Exception $e) {
-            return redirect()->route('header.index')->with('error', 'Terjadi Kesalahan Pada Sistem');
-        }
+            }
+
+
+        });
+        // Menggunakan redirect tanpa menyimpan variabel headers
+        return redirect()->route('header.index')->with('success', 'Data Berhasil Disimpan');
+    } catch (\Exception $e) {
+        // Menangani kesalahan sistem
+        return redirect()->route('header.index')->with('error', 'Terjadi Kesalahan Pada Sistem');
+    }
     }
 
     /**
@@ -90,14 +95,39 @@ class HeaderController extends Controller
      */
     public function update(UpdateHeaderRequest $request, Header $header)
     {
-        UploadController::deleteSingleImage($header);
+        // Validasi input
+        $validator = Validator::make($request->all(), $request->rules());
 
-        $image = UploadController::uploadSingleImage('assets/image');
-        $request->merge(['image' => $image]);
+        if ($validator->fails()) {
+            return redirect()->route('header.edit', $header->id)->withErrors($validator)->withInput();
+        }
 
-        $header->update($request->all());
+        try {
+            DB::transaction(function () use ($request, $header) {
+                $image = $request->file('image');
 
-        return redirect()->route('header.index')->with('success', 'Data berhasil update');
+                // Menghapus gambar lama jika ada gambar baru
+                if ($image) {
+                    ImageHelper::deleteImage('assets/images/' . $header->image);
+                }
+
+                // Menggunakan helper untuk mengunggah gambar
+                $imageFileName = $image ? ImageHelper::uploadImage($image) : $header->image;
+
+                // Memperbarui data Header
+                $header->update([
+                    'name' => $request->input('name'),
+                    'as' => $request->input('as'),
+                    'email' => $request->input('email'),
+                    'image' => $imageFileName,
+                    'is_active' => $request->input('is_active', 0),
+                ]);
+            });
+
+            return redirect()->route('header.index')->with('success', 'Data Berhasil Diperbarui');
+        } catch (\Exception $e) {
+            return redirect()->route('header.edit', $header->id)->with('error', 'Terjadi Kesalahan Pada Sistem');
+        }
     }
 
     /**
@@ -105,11 +135,24 @@ class HeaderController extends Controller
      */
     public function destroy(Header $header)
     {
-        UploadController::deleteSingleImage($header);
+        $deleteImage = ImageHelper::deleteImage('assets/images/' . $header->image);
 
-        $header->delete();
+        if ($deleteImage) {
+            $header->delete();
 
-        return redirect()->route('header.index')->with('success', 'Data berhasil dihapus');
+            return redirect()->route('header.index')->with('success', 'Data berhasil dihapus');
+        } else {
+            return redirect()->route('header.index')->with('error', 'Data gagal dihapus');
+        }
+
+    }
+
+
+    public function test()
+    {
+        return response()->json([
+
+        ]);
     }
 
 

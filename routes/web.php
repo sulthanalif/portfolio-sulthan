@@ -37,6 +37,9 @@ Route::namespace('Auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 
+    //route tester
+    Route::get('/test', [HeaderController::class, 'test']);
+
     //data master
     Route::resource('/admin/header',HeaderController::class);
 
