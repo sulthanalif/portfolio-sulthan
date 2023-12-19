@@ -20,6 +20,9 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets/admin') }}/css/sb-admin-2.min.css" rel="stylesheet">
 
+    {{-- My Style --}}
+    @stack('style')
+
 </head>
 
 <body id="page-top">
@@ -48,15 +51,15 @@
                     </div>
 
                     <!-- Content Row -->
-                    
+
 
                         @yield('content')
 
-                    
+
 
                     <!-- Content Row -->
 
-                    
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -65,13 +68,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
+            @include('layouts.footer')
             <!-- End of Footer -->
 
         </div>
@@ -85,7 +82,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('assets/admin') }}/vendor/jquery/jquery.min.js"></script>
@@ -103,6 +100,9 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets/admin') }}/js/demo/chart-area-demo.js"></script>
     <script src="{{ asset('assets/admin') }}/js/demo/chart-pie-demo.js"></script>
+
+    {{-- My JavaScript --}}
+    @stack('script')
 
 </body>
 

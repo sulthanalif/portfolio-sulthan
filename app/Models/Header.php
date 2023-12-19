@@ -17,6 +17,5 @@ class Header extends Model
         'as',
         'email',
         'image',
-        'is_active',
     ];
 }

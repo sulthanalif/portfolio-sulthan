@@ -21,7 +21,7 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($header as $item)
+              @foreach ($headers as $item)
               <tr>
                 <th scope="row">1</th>
                 <td>{{ $item->name }}</td>
@@ -38,8 +38,10 @@
             </tbody>
           </table>
 
-          {{ $header->links() }}
+          {{ $headers->links() }}
         </div>
       </div>
     </div>
 @endsection
+
+

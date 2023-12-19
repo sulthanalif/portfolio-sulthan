@@ -24,9 +24,7 @@ Route::namespace('home')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 });
 
-Route::get('/admin', function () {
-    return view('admin.dashboard.index');
-});
+
 
 Route::namespace('Auth')->group(function () {
     Route::view('/login', 'auth.login')->name('login')->middleware('guest');
@@ -41,4 +39,7 @@ Route::middleware(['auth'])->group(function () {
 
     //data master
     Route::resource('/admin/header',HeaderController::class);
+
+    //crud
+    Route::post('/admin/header', [HeaderController::class, 'store'])->name('header.post');
 });

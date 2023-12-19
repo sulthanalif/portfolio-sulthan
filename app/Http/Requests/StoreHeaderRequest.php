@@ -22,10 +22,10 @@ class StoreHeaderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
+            'name' => 'required',
             'as' => 'required',
-            'email' => 'required|email',
-            'image' => 'required|image'
+            'email' => 'required',
+            'image' => 'required|mimes:jpg,png,jpeg,gif,svg,jfif'
         ];
     }
 }
