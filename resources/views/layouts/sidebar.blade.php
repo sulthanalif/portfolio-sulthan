@@ -39,7 +39,7 @@
                 <h6 class="collapse-header">Custom Data:</h6>
                 <a class="collapse-item" href="{{ route('header.index') }}">Header</a>
                 <a class="collapse-item" href="#">About</a>
-                <a class="collapse-item" href="#">Portfolio</a>
+                <a class="collapse-item" href="{{ route('portfolio.index') }}">Portfolio</a>
                 <a class="collapse-item" href="#">Contact</a>
             </div>
         </div>
@@ -72,9 +72,9 @@
         Addons
     </div>
 
-   
 
- 
+
+
 
     <!-- Nav Item - Profile -->
     <li class="nav-item">
@@ -91,7 +91,7 @@
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 
-    
+
 
 </ul>
 <!-- End of Sidebar -->

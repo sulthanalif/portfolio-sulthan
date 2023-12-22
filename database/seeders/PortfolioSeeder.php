@@ -16,7 +16,8 @@ class PortfolioSeeder extends Seeder
         Portfolio::create([
             'title' => 'Aplikasi Web SPK dengan metode SAW',
             'description' => 'Aplikasi ini saya buat karena penasaran dengan mata kuliah SPK, dibuat menggunakan framework Laravel',
-            'image' => 'spk.png'
+            'image' => 'spk.png',
+            'is_active' => 1
         ]);
     }
 }

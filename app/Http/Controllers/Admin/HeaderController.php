@@ -83,11 +83,11 @@ class HeaderController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource.ss
      */
     public function edit(Header $header)
     {
-        return view('admin.header.edit', compact('header'));
+        return view('admin.header.edit', ['header' => $header]);
     }
 
     /**
@@ -148,12 +148,7 @@ class HeaderController extends Controller
     }
 
 
-    public function test()
-    {
-        return response()->json([
 
-        ]);
-    }
 
 
 }

@@ -10,7 +10,10 @@ class Header extends Model
 {
     use HasFactory, UuidTrait;
 
-    protected $table = 'headers';
+    protected $table = 'headers'; // Specify the table name
+    protected $keyType = 'string';
+    protected $primaryKey = 'id';
+    public $incrementing = false;
 
     protected $fillable = [
         'name',

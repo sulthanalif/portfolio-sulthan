@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'page' => 'Edit Header',
+    'page' => 'Create Portfolio',
     'active' => 'master'
 ])
 
@@ -7,25 +7,25 @@
     <div class="row justify-content-center">
         <div class="card" style="width: 40rem;">
             <div class="card-body">
-                <form class="user" method="POST" action="{{ route('header.post') }}" enctype="multipart/form-data">
+                <form class="user" method="POST" action="{{ route('portfolio.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <input type="text" name="name" value="{{ $header->name }}" class="form-control form-control-user"
-                            id="exampleInputEmail" placeholder="Enter Name...">
+                        <input type="text" name="title" class="form-control form-control-user"
+                            id="exampleInputEmail" placeholder="Enter title...">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="as" value="{{ $header->as }}" class="form-control form-control-user"
-                            id="exampleInputEmail" placeholder="Enter As...">
+                        <input type="text" name="description" class="form-control form-control-user"
+                            id="exampleInputEmail" placeholder="Enter Description...">
                     </div>
-                    <div class="form-group">
-                        <input type="email" name="email" value="{{ $header->email }}" class="form-control form-control-user"
+                    {{-- <div class="form-group">
+                        <input type="email" name="email" class="form-control form-control-user"
                             id="exampleInputEmail" placeholder="Enter Email...">
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="image">Choose Image:</label>
                         <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input"  id="imageInput" accept="image/*">
-                            <label class="custom-file-label" for="imageInput">{{ $header->image }}</label>
+                            <input type="file" name="image" class="custom-file-input" id="imageInput" accept="image/*">
+                            <label class="custom-file-label" for="imageInput">Select file...</label>
                         </div>
                     </div>
 
